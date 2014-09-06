@@ -22,6 +22,7 @@ if($_SESSION['user']==1) {
 ?>
 	<html>
 	<head>
+        <link rel="stylesheet" href="./bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<script type="text/javascript" src="jquery.min.js"></script>
 		<script type="text/javascript" src="myvote.js"></script>
@@ -29,41 +30,29 @@ if($_SESSION['user']==1) {
 	<body>
 		<form method="POST" action="castvote.php" width="900px">
 		<h1><?php echo $apost; ?></h1>
-		<table cellspacing="10" align="center">
+        <div class="container">
+        <div class="row">
 		<?php
-		$idarr=array();
-		$namearr=array();
 		$sql="SELECT * FROM candidates WHERE post = '".$apost."' ORDER BY Name";
 		$result=mysql_query($sql) or die(mysql_error());
-		echo "<tr>";
+
 		while($row=mysql_fetch_assoc($result)) {
-			array_push($idarr, $row['id']);
-			array_push($namearr, $row['Name']);
-			echo '<td><img class="candpic" src="pics/senators/'.$row['pic'].'" /></td>';
+            echo "<div class='col-md-3 text-center'>";
+            echo "<br>";
+			echo '<p><b>'.$row['Name'].'</b></p>';
+			echo '<img class="candpic" src="pics/senators/'.$row['pic'].'"/>';
+			echo "<div>";
+            echo "<br>";
+			echo '<input type="radio" class="pref" name="pref1" value="'.$row['id'].'" />1<sup>st</sup> preference<br/>';
+			echo '<input type="radio" class="pref" name="pref2" value="'.$row['id'].'" />2<sup>nd</sup> preference<br/>';
+			echo '<input type="radio" class="pref" name="pref3" value="'.$row['id'].'" />3<sup>rd</sup> preference<br/>';
+			echo "</div>";
+            echo "</div>";
 		}
 		//150x200 for large data
-		echo "</tr>";
-
-		echo '<tr align="center">';
-		foreach($namearr as $val) {
-			echo '<td><b>'.$val.'</b></td>';
-		}
-		echo '</tr>';
-		$len=count($idarr);
-		?>
-
-		<tr align="center">
-		<?php
-		for ($i=0; $i < $len; $i++) {
-			echo "<td>";
-			echo '<input type="radio" class="pref" name="pref1" value="'.$idarr[$i].'" />1<sup>st</sup> preference<br/>';
-			echo '<input type="radio" class="pref" name="pref2" value="'.$idarr[$i].'" />2<sup>nd</sup> preference<br/>';
-			echo '<input type="radio" class="pref" name="pref3" value="'.$idarr[$i].'" />3<sup>rd</sup> preference<br/>';
-			echo "</td>";
-		}
-		?>
-		</tr>
-		</table>
+        ?>
+    </div>
+    </div>
 
 		<script type="text/javascript">
 			$(document).ready(function() {
