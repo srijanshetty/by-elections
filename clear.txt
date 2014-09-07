@@ -1,0 +1,3 @@
+USE by_elections;
+UPDATE `candidates` SET `votes1`=0,`votes2`=0,`votes3`=0;
+UPDATE `votes` SET `votecount`=0;
