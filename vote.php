@@ -37,7 +37,7 @@ if($_SESSION['user']==1) {
 		$result=mysql_query($sql) or die(mysql_error());
 
 		while($row=mysql_fetch_assoc($result)) {
-            echo "<div class='col-md-3 text-center'>";
+            echo "<div class='col-md-2 text-center'>";
             echo "<br>";
 			echo '<p><b>'.$row['Name'].'</b></p>';
 			echo '<img class="candpic" src="pics/senators/'.$row['pic'].'"/>';
@@ -49,7 +49,6 @@ if($_SESSION['user']==1) {
 			echo "</div>";
             echo "</div>";
 		}
-		//150x200 for large data
         ?>
     </div>
     </div>
@@ -68,40 +67,8 @@ if($_SESSION['user']==1) {
 				});
 			});
 		</script>
-		<div align="center">
-			<?php
-			if($len==9) {
-				?>
-				<style type="text/css">
-				.candpic {
-					width: 135px;
-					height: 180px;
-				}
-				</style>
-				<?php
-			}
-			else if($len==10) {
-				?>
-				<style type="text/css">
-				.candpic {
-					width: 120px;
-					height: 175px;
-				}
-				</style>
-				<?php
-			}
-			else if($len>5) {
-				?>
-				<style type="text/css">
-				.candpic {
-					width: 150px;
-					height: 200px;
-				}
-				</style>
-				<?php
-			}
-			?>
 
+		<div align="center">
 			<br/><br/>
 			<input type="hidden" name="total" value="<?php echo $total; ?>" />
 			<input type="hidden" name="next" value="<?php echo $next; ?>" />
